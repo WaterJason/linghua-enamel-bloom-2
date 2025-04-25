@@ -1,13 +1,11 @@
-
 import { useState } from "react";
 import MainLayout from "@/components/Layout/MainLayout";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@/components/ui/sonner";
 
 const Contact = () => {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -25,9 +23,8 @@ const Contact = () => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     
-    // Show success notification
-    toast({
-      title: "消息已发送",
+    // Show success notification using sonner toast
+    toast("消息已发送", {
       description: "感谢您的留言，我们会尽快与您取得联系。",
     });
     
