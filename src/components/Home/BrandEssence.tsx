@@ -67,7 +67,7 @@ const BrandEssence = () => {
     {
       title: "创新工艺 · 固釉生辉",
       enTitle: "Innovative Craft · Solid Enamel Glows",
-      description: "从百年景泰蓝到聆花专利"固釉"创新，揭秘指尖上的非遗传奇。",
+      description: "从百年景泰蓝到聆花专利\"固釉\"创新，揭秘指尖上的非遗传奇。",
       linkText: "探索工艺",
       linkUrl: "/about/craft",
       imageSrc: "https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=800&q=80",
