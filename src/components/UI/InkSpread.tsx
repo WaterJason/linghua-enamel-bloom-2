@@ -55,19 +55,19 @@ const InkSpread = ({
         style={{
           backgroundColor: color,
           transformOrigin: "center",
-          transition: `transform ${duration}ms cubic-bezier(0.25, 1, 0.5, 1), opacity ${duration}ms ease-out`
+          transition: `transform ${duration}ms cubic-bezier(0.25, 1, 0.5, 1), opacity ${duration}ms ease-out`,
+          transform: "scale(0)"
         }}
       />
       {children}
-      <style jsx>{`
+      <style>
+        {`
         .ink-active .ink-spread-effect {
-          transform: scale(1);
-          opacity: 1;
+          transform: scale(1) !important;
+          opacity: 1 !important;
         }
-        .ink-spread-effect {
-          transform: scale(0);
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
