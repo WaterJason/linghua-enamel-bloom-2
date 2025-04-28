@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 
-interface ProgressProps {
+interface ProgressBarProps {
   value: number;
   max: number;
   className?: string;
@@ -15,7 +14,7 @@ interface ProgressProps {
  * 进度条组件
  * 用于显示进度、加载状态或完成度
  */
-const Progress = ({
+const ProgressBar = ({
   value,
   max = 100,
   className = "",
@@ -23,7 +22,7 @@ const Progress = ({
   color = "azure",
   size = "md",
   animated = false
-}: ProgressProps) => {
+}: ProgressBarProps) => {
   const [width, setWidth] = useState(0);
   
   useEffect(() => {
@@ -68,4 +67,4 @@ const Progress = ({
   );
 };
 
-export default Progress;
+export default ProgressBar;
