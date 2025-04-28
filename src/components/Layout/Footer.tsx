@@ -1,5 +1,8 @@
 
+import React from "react";
 import { Link } from "react-router-dom";
+import { Mail, Phone } from "lucide-react";
+import { t } from "@/lib/i18n";
 
 const Footer = () => {
   return (
@@ -7,7 +10,7 @@ const Footer = () => {
       <div className="container-custom">
         <div className="grid md:grid-cols-12 gap-8 mb-12">
           <div className="md:col-span-4">
-            <h3 className="text-2xl mb-4">聆花珐琅</h3>
+            <h3 className="text-2xl mb-4">{t('brand.name')}</h3>
             <p className="text-sm font-garamond italic text-beige-600 mb-4">LINGHUA ENAMEL</p>
             <p className="text-sm text-beige-700 mb-6 max-w-xs">
               匠心传承 美育生活 <br />
@@ -48,6 +51,11 @@ const Footer = () => {
                   品牌历程
                 </Link>
               </li>
+              <li>
+                <Link to="/faq" className="text-sm text-beige-700 hover:text-azure-700 transition-colors">
+                  常见问题
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="md:col-span-2">
@@ -68,19 +76,38 @@ const Footer = () => {
                   合作与定制
                 </Link>
               </li>
+              <li>
+                <Link to="/workshop" className="text-sm text-beige-700 hover:text-azure-700 transition-colors">
+                  手作体验
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="md:col-span-4">
             <h5 className="font-medium mb-4">联系我们</h5>
-            <address className="not-italic">
-              <p className="text-sm text-beige-700 mb-2">广州｜番禺区大学城岭南印象园.聆花掐丝珐琅馆</p>
-              <p className="text-sm text-beige-700 mb-2">深圳｜南山区南头古城西集.景之蓝</p>
-              <p className="text-sm text-beige-700 mb-2">VIP 热线: Jason 139 2888 2508</p>
-              <p className="text-sm text-beige-700 mb-2">
+            <address className="not-italic space-y-3">
+              <p className="text-sm text-beige-700">广州｜番禺区大学城岭南印象园.聆花掐丝珐琅馆</p>
+              <p className="text-sm text-beige-700">深圳｜南山区南头古城西集.景之蓝</p>
+              <div className="flex items-center text-sm text-beige-700">
+                <Phone className="w-4 h-4 mr-2 text-seal-600" />
+                <span>VIP 热线: Jason 139 2888 2508</span>
+              </div>
+              <div className="flex items-center text-sm text-beige-700">
+                <Mail className="w-4 h-4 mr-2 text-seal-600" />
                 <a href="mailto:contact@linghuaart.com" className="hover:text-azure-700 transition-colors">
                   contact@linghuaart.com
                 </a>
-              </p>
+              </div>
+              
+              {/* 快速联系按钮 */}
+              <div className="pt-3">
+                <Link 
+                  to="/contact" 
+                  className="inline-flex items-center px-4 py-2 bg-seal-600 text-white rounded hover:bg-seal-700 transition-colors text-sm"
+                >
+                  在线咨询
+                </Link>
+              </div>
             </address>
           </div>
         </div>

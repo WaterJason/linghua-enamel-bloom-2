@@ -1,30 +1,41 @@
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import { ChevronDown } from "lucide-react";
+import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getCurrentLocale, t } from "@/lib/i18n";
+import { getCurrentLocale, t, toggleLocale, localeChangeEvent } from "@/lib/i18n";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentLocale, setCurrentLocale] = useState(getCurrentLocale());
   const location = useLocation();
-  const currentLocale = getCurrentLocale();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
+    
+    // 监听语言变化
+    const unsubscribe = localeChangeEvent.listen((locale) => {
+      setCurrentLocale(locale);
+    });
+    
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      unsubscribe();
     };
   }, []);
   
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
+
+  const handleLanguageToggle = () => {
+    toggleLocale();
+  };
 
   // 导航项结构，支持二级菜单
   const navItems = [
@@ -76,6 +87,11 @@ const Header = () => {
       children: [] 
     },
     { 
+      name: t("nav.faq"),
+      path: "/faq",
+      children: [] 
+    },
+    { 
       name: t("nav.contact"),
       path: "/contact",
       children: [] 
@@ -101,7 +117,7 @@ const Header = () => {
             <div className="flex items-center">
               <h1 className="text-xl font-medium tracking-wider">{t("brand.name")}</h1>
               <span className="ml-2 text-xs font-garamond italic text-beige-600">
-                {currentLocale === 'en-US' ? 'LINGHUA ENAMEL' : 'LINGHUA ENAMEL'}
+                {currentLocale === 'en-US' ? 'ENAMEL ART' : '珐琅艺术'}
               </span>
             </div>
           </Link>
@@ -161,9 +177,11 @@ const Header = () => {
           {/* Language Selector */}
           <div className="hidden lg:flex items-center ml-4">
             <button 
-              className="text-sm text-beige-700 hover:text-azure-700 transition-colors"
-              aria-label={currentLocale === 'zh-CN' ? 'Switch to English' : '切换至中文'}
+              onClick={handleLanguageToggle}
+              className="flex items-center text-sm text-beige-700 hover:text-azure-700 transition-colors"
+              aria-label={t('nav.language_switch')}
             >
+              <Globe className="w-4 h-4 mr-1" />
               {currentLocale === 'zh-CN' ? 'EN' : '中文'}
             </button>
           </div>
@@ -235,8 +253,10 @@ const Header = () => {
               
               <li className="pt-4 border-t border-beige-100">
                 <button 
-                  className="text-beige-700 hover:text-azure-700 transition-colors"
+                  onClick={handleLanguageToggle}
+                  className="flex items-center text-beige-700 hover:text-azure-700 transition-colors"
                 >
+                  <Globe className="w-4 h-4 mr-2" />
                   {currentLocale === 'zh-CN' ? 'English' : '中文'}
                 </button>
               </li>

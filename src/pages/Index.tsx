@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../components/Layout/MainLayout";
 import Hero from "../components/Home/Hero";
 import FeaturedWorks from "../components/Home/FeaturedWorks";

@@ -2,8 +2,9 @@
 /**
  * 多语言国际化工具
  * 为网站提供多语言支持的基础结构
- * 注意：这是一个基础实现，实际项目中应考虑使用i18next等成熟库
  */
+
+import { createEvent } from '@/lib/utils';
 
 export type SupportedLocale = 'zh-CN' | 'en-US';
 
@@ -14,6 +15,9 @@ interface TranslationRecord {
 interface Translations {
   [locale: string]: TranslationRecord;
 }
+
+// 创建语言变更事件
+export const localeChangeEvent = createEvent<SupportedLocale>('localeChange');
 
 // 翻译内容
 const translations: Translations = {
@@ -41,6 +45,8 @@ const translations: Translations = {
     'nav.corporate_events': '企业团建',
     'nav.news': '资讯',
     'nav.contact': '联系我们',
+    'nav.faq': '常见问题',
+    'nav.language_switch': '切换到英文',
     'craft.title': '固釉掐丝珐琅',
     'craft.description': '传承600年宫廷技艺，融合当代东方美学。',
     'testimonials.title': '用户体验',
@@ -50,6 +56,11 @@ const translations: Translations = {
     'cta.explore': '探索更多',
     'faq.title': '常见问题',
     'faq.more': '查看更多问题',
+    'faq.intro': '以下是关于聆花文化与掐丝珐琅艺术的常见问题解答',
+    'faq.contact_prompt': '如有其他疑问，欢迎联系我们',
+    'notfound.title': '页面未找到',
+    'notfound.description': '抱歉，您访问的页面不存在或正在建设中。',
+    'notfound.back_home': '返回首页',
   },
   'en-US': {
     'brand.name': 'LINGHUA',
@@ -75,6 +86,8 @@ const translations: Translations = {
     'nav.corporate_events': 'Corporate Events',
     'nav.news': 'News',
     'nav.contact': 'Contact',
+    'nav.faq': 'FAQ',
+    'nav.language_switch': 'Switch to Chinese',
     'craft.title': 'Solid Enamel Cloisonné',
     'craft.description': 'Inheriting 600 years of imperial craftsmanship, combined with contemporary oriental aesthetics.',
     'testimonials.title': 'Testimonials',
@@ -84,6 +97,11 @@ const translations: Translations = {
     'cta.explore': 'Explore More',
     'faq.title': 'FAQ',
     'faq.more': 'View More Questions',
+    'faq.intro': 'Here are answers to frequently asked questions about Linghua and cloisonné enamel art',
+    'faq.contact_prompt': 'If you have other questions, please contact us',
+    'notfound.title': 'Page Not Found',
+    'notfound.description': 'Sorry, the page you are looking for does not exist or is under construction.',
+    'notfound.back_home': 'Return to Home',
   }
 };
 
@@ -103,12 +121,10 @@ export const getCurrentLocale = (): SupportedLocale => currentLocale;
 export const setLocale = (locale: SupportedLocale): void => {
   if (Object.keys(translations).includes(locale)) {
     currentLocale = locale;
-    // 在实际应用中，这里可能还需要触发UI重新渲染
-    // 或将语言选择保存到localStorage等
     document.documentElement.setAttribute('lang', locale);
     
-    // 发布语言变更事件，让组件可以监听并更新
-    window.dispatchEvent(new CustomEvent('localechange', { detail: locale }));
+    // 发布语言变更事件
+    localeChangeEvent.dispatch(locale);
     
     // 保存到localStorage
     try {
@@ -117,6 +133,14 @@ export const setLocale = (locale: SupportedLocale): void => {
       console.error('无法保存语言设置到localStorage', e);
     }
   }
+};
+
+/**
+ * 切换语言
+ */
+export const toggleLocale = (): void => {
+  const newLocale = currentLocale === 'zh-CN' ? 'en-US' : 'zh-CN';
+  setLocale(newLocale);
 };
 
 /**
@@ -178,11 +202,29 @@ export const formatCurrency = (value: number): string => {
   return `${currencySymbol}${value.toLocaleString(currentLocale)}`;
 };
 
+// 需要添加到utils.ts中的createEvent函数
+// 添加在这里作为参考，实际应在utils.ts中实现
+// export function createEvent<T>(name: string) {
+//   return {
+//     dispatch: (data: T) => {
+//       window.dispatchEvent(new CustomEvent(name, { detail: data }));
+//     },
+//     listen: (handler: (data: T) => void) => {
+//       const listener = (event: CustomEvent<T>) => handler(event.detail);
+//       window.addEventListener(name, listener as EventListener);
+//       return () => {
+//         window.removeEventListener(name, listener as EventListener);
+//       };
+//     }
+//   };
+// }
+
 export default {
   t,
   formatDate,
   formatCurrency,
   setLocale,
+  toggleLocale,
   getCurrentLocale,
   initLocale
 };
