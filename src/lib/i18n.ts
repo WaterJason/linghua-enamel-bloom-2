@@ -15,31 +15,75 @@ interface Translations {
   [locale: string]: TranslationRecord;
 }
 
-// 简单翻译示例
+// 翻译内容
 const translations: Translations = {
   'zh-CN': {
     'brand.name': '聆花',
     'brand.slogan': '千年珐琅，当代光华。',
+    'brand.innovation': '固釉掐丝珐琅 - 国家专利技术',
     'nav.home': '首页',
     'nav.about': '关于我们',
+    'nav.brand_story': '品牌故事',
+    'nav.founder': '创始人',
     'nav.craft': '非遗工艺',
+    'nav.milestones': '品牌历程',
     'nav.collections': '艺术臻品',
+    'nav.art_collections': '艺术珍品',
+    'nav.limited_editions': '限量系列',
+    'nav.custom_design': '定制服务',
+    'nav.lifestyle': '文创生活',
+    'nav.home_decor': '家居饰品',
+    'nav.accessories': '个人配饰',
+    'nav.gift_sets': '礼品套装',
     'nav.workshop': '手作体验',
+    'nav.individual_workshop': '个人体验',
+    'nav.group_workshop': '亲子手作',
+    'nav.corporate_events': '企业团建',
+    'nav.news': '资讯',
     'nav.contact': '联系我们',
     'craft.title': '固釉掐丝珐琅',
     'craft.description': '传承600年宫廷技艺，融合当代东方美学。',
+    'testimonials.title': '用户体验',
+    'testimonials.subtitle': '聆听用户的声音',
+    'cta.book_now': '立即预约',
+    'cta.contact_us': '联系我们',
+    'cta.explore': '探索更多',
+    'faq.title': '常见问题',
+    'faq.more': '查看更多问题',
   },
   'en-US': {
     'brand.name': 'LINGHUA',
     'brand.slogan': 'Ancient Enamel Art, Contemporary Elegance.',
+    'brand.innovation': 'Solid Enamel Cloisonné - Patented Technology',
     'nav.home': 'Home',
     'nav.about': 'About Us',
+    'nav.brand_story': 'Brand Story',
+    'nav.founder': 'Founder',
     'nav.craft': 'Craftsmanship',
+    'nav.milestones': 'Milestones',
     'nav.collections': 'Collections',
+    'nav.art_collections': 'Art Collections',
+    'nav.limited_editions': 'Limited Editions',
+    'nav.custom_design': 'Custom Design',
+    'nav.lifestyle': 'Lifestyle',
+    'nav.home_decor': 'Home Decor',
+    'nav.accessories': 'Accessories',
+    'nav.gift_sets': 'Gift Sets',
     'nav.workshop': 'Workshop',
+    'nav.individual_workshop': 'Individual Workshop',
+    'nav.group_workshop': 'Family Workshop',
+    'nav.corporate_events': 'Corporate Events',
+    'nav.news': 'News',
     'nav.contact': 'Contact',
     'craft.title': 'Solid Enamel Cloisonné',
     'craft.description': 'Inheriting 600 years of imperial craftsmanship, combined with contemporary oriental aesthetics.',
+    'testimonials.title': 'Testimonials',
+    'testimonials.subtitle': 'Hear from our clients',
+    'cta.book_now': 'Book Now',
+    'cta.contact_us': 'Contact Us',
+    'cta.explore': 'Explore More',
+    'faq.title': 'FAQ',
+    'faq.more': 'View More Questions',
   }
 };
 
@@ -61,7 +105,44 @@ export const setLocale = (locale: SupportedLocale): void => {
     currentLocale = locale;
     // 在实际应用中，这里可能还需要触发UI重新渲染
     // 或将语言选择保存到localStorage等
+    document.documentElement.setAttribute('lang', locale);
+    
+    // 发布语言变更事件，让组件可以监听并更新
+    window.dispatchEvent(new CustomEvent('localechange', { detail: locale }));
+    
+    // 保存到localStorage
+    try {
+      localStorage.setItem('linghua-locale', locale);
+    } catch (e) {
+      console.error('无法保存语言设置到localStorage', e);
+    }
   }
+};
+
+/**
+ * 初始化语言
+ * 优先从localStorage读取，其次从浏览器语言设置推断
+ */
+export const initLocale = (): void => {
+  let locale: SupportedLocale = 'zh-CN';
+  
+  // 尝试从localStorage读取
+  try {
+    const savedLocale = localStorage.getItem('linghua-locale');
+    if (savedLocale && (savedLocale === 'zh-CN' || savedLocale === 'en-US')) {
+      locale = savedLocale as SupportedLocale;
+    } else {
+      // 从浏览器语言设置推断
+      const browserLang = navigator.language;
+      if (browserLang.startsWith('en')) {
+        locale = 'en-US';
+      }
+    }
+  } catch (e) {
+    console.error('无法读取语言设置', e);
+  }
+  
+  setLocale(locale);
 };
 
 /**
@@ -102,5 +183,6 @@ export default {
   formatDate,
   formatCurrency,
   setLocale,
-  getCurrentLocale
+  getCurrentLocale,
+  initLocale
 };
