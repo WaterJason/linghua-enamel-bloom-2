@@ -18,7 +18,6 @@ const Header = () => {
     };
     window.addEventListener("scroll", handleScroll);
     
-    // 监听语言变化
     const unsubscribe = localeChangeEvent.listen((locale) => {
       setCurrentLocale(locale);
     });
@@ -37,65 +36,31 @@ const Header = () => {
     toggleLocale();
   };
 
-  // 导航项结构，支持二级菜单
+  // 简化的导航结构
   const navItems = [
+    { name: "首页", path: "/" },
     { 
-      name: t("nav.home"),
-      path: "/",
-      children: [] 
-    },
-    { 
-      name: t("nav.about"),
+      name: "品牌", 
       path: "/about",
       children: [
-        { name: t("nav.brand_story"), path: "/about/story" },
-        { name: t("nav.founder"), path: "/about/founder" },
-        { name: t("nav.craft"), path: "/about/craft" },
-        { name: t("nav.milestones"), path: "/about/milestones" }
+        { name: "品牌故事", path: "/about/story" },
+        { name: "创始人", path: "/about/founder" },
+        { name: "非遗工艺", path: "/about/craft" },
+        { name: "品牌历程", path: "/about/milestones" }
       ]
     },
     { 
-      name: t("nav.collections"),
+      name: "作品", 
       path: "/collections",
       children: [
-        { name: t("nav.art_collections"), path: "/collections" },
-        { name: t("nav.limited_editions"), path: "/collections/limited" },
-        { name: t("nav.custom_design"), path: "/collections/custom" }
+        { name: "艺术臻品", path: "/collections" },
+        { name: "文创生活", path: "/lifestyle" },
+        { name: "合作定制", path: "/collaboration" }
       ]
     },
-    { 
-      name: t("nav.lifestyle"),
-      path: "/lifestyle",
-      children: [
-        { name: t("nav.home_decor"), path: "/lifestyle/decor" },
-        { name: t("nav.accessories"), path: "/lifestyle/accessories" },
-        { name: t("nav.gift_sets"), path: "/lifestyle/gifts" }
-      ]
-    },
-    { 
-      name: t("nav.workshop"),
-      path: "/workshop",
-      children: [
-        { name: t("nav.individual_workshop"), path: "/workshop#individual" },
-        { name: t("nav.group_workshop"), path: "/workshop#group" },
-        { name: t("nav.corporate_events"), path: "/workshop#corporate" }
-      ]
-    },
-    { 
-      name: t("nav.news"),
-      path: "/news",
-      children: [] 
-    },
-    { 
-      name: t("nav.faq"),
-      path: "/faq",
-      children: [] 
-    },
-    { 
-      name: t("nav.contact"),
-      path: "/contact",
-      children: [] 
-    }
+    { name: "手作体验", path: "/workshop" },
+    { name: "品牌动态", path: "/news" },
+    { name: "联系我们", path: "/contact" }
   ];
 
   const isActive = (path: string) => {
@@ -115,31 +80,31 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="relative z-10">
             <div className="flex items-center">
-              <h1 className="text-xl font-medium tracking-wider">{t("brand.name")}</h1>
+              <h1 className="text-2xl font-medium tracking-wider">聆花</h1>
               <span className="ml-2 text-xs font-garamond italic text-beige-600">
-                {currentLocale === 'en-US' ? 'ENAMEL ART' : '珐琅艺术'}
+                LINGHUA ENAMEL
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation with Dropdown Menus */}
+          {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList className="space-x-4">
+            <NavigationMenuList className="space-x-8">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.path}>
-                  {item.children.length > 0 ? (
+                  {item.children ? (
                     <>
                       <NavigationMenuTrigger 
                         className={`${
                           isActive(item.path) 
-                            ? "text-azure-700 after:bg-seal-500 after:scale-x-100" 
+                            ? "text-azure-700" 
                             : "hover:text-azure-700"
-                        } py-2 text-sm transition-colors`}
+                        } py-2 text-base transition-colors bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent`}
                       >
                         {item.name}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[220px] gap-1 p-2">
+                        <ul className="grid w-[200px] gap-1 p-2">
                           {item.children.map((child) => (
                             <li key={child.path}>
                               <NavigationMenuLink asChild>
@@ -160,10 +125,10 @@ const Header = () => {
                   ) : (
                     <Link
                       to={item.path}
-                      className={`py-2 text-sm transition-colors hover:text-azure-700 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:transition-transform after:duration-300 after:origin-bottom-right ${
+                      className={`py-2 text-base transition-colors hover:text-azure-700 relative ${
                         isActive(item.path)
-                          ? "text-azure-700 after:bg-seal-500 after:scale-x-100"
-                          : "after:bg-seal-500 after:scale-x-0 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                          ? "text-azure-700"
+                          : ""
                       }`}
                     >
                       {item.name}
@@ -174,12 +139,11 @@ const Header = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          {/* Language Selector */}
-          <div className="hidden lg:flex items-center ml-4">
+          {/* Language Toggle - Hidden for now to simplify */}
+          <div className="hidden">
             <button 
               onClick={handleLanguageToggle}
               className="flex items-center text-sm text-beige-700 hover:text-azure-700 transition-colors"
-              aria-label={t('nav.language_switch')}
             >
               <Globe className="w-4 h-4 mr-1" />
               {currentLocale === 'zh-CN' ? 'EN' : '中文'}
@@ -225,14 +189,14 @@ const Header = () => {
                 <li key={item.path} className="space-y-2">
                   <Link
                     to={item.path}
-                    className={`block py-2 text-lg font-noto-serif-sc ${
+                    className={`block py-2 text-lg ${
                       isActive(item.path) ? "text-azure-700" : ""
                     }`}
                   >
                     {item.name}
                   </Link>
                   
-                  {item.children.length > 0 && (
+                  {item.children && (
                     <ul className="pl-4 space-y-2">
                       {item.children.map((child) => (
                         <li key={child.path}>
@@ -250,16 +214,6 @@ const Header = () => {
                   )}
                 </li>
               ))}
-              
-              <li className="pt-4 border-t border-beige-100">
-                <button 
-                  onClick={handleLanguageToggle}
-                  className="flex items-center text-beige-700 hover:text-azure-700 transition-colors"
-                >
-                  <Globe className="w-4 h-4 mr-2" />
-                  {currentLocale === 'zh-CN' ? 'English' : '中文'}
-                </button>
-              </li>
             </ul>
           </nav>
         </div>
