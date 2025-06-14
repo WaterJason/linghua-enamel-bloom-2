@@ -8,13 +8,13 @@ const BrandIntro = () => {
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl mb-6">
+            <h2 className="text-3xl md:text-4xl mb-6 text-tianqing-800">
               让非遗走进生活
-              <span className="block text-lg font-garamond italic text-beige-600 mt-2">
+              <span className="block text-lg font-garamond italic text-guanyao-600 mt-2">
                 Bringing Heritage into Life
               </span>
             </h2>
-            <div className="space-y-6 text-beige-800">
+            <div className="space-y-6 text-molin-800">
               <p className="text-lg leading-relaxed">
                 聆花文化致力于传承与创新掐丝珐琅这一600年宫廷技艺，
                 通过专利"固釉"工艺，让古老技艺焕发新生光彩。

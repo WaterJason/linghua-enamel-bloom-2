@@ -27,13 +27,13 @@ const CraftIntroduction = () => {
   ];
 
   return (
-    <section className="py-20 bg-beige-50">
+    <section className="py-20 bg-ruyao-50">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl mb-4">
+          <h2 className="text-3xl md:text-4xl mb-4 text-tianqing-800">
             六百年宫廷技艺的当代演绎
           </h2>
-          <p className="text-lg text-beige-700 max-w-3xl mx-auto">
+          <p className="text-lg text-guanyao-700 max-w-3xl mx-auto">
             从传统景泰蓝到聆花创新"固釉"工艺，每道工序都凝聚着匠人的心血与智慧
           </p>
         </div>
@@ -49,12 +49,12 @@ const CraftIntroduction = () => {
           <div className="space-y-8">
             {craftSteps.map((step, index) => (
               <div key={step.step} className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-seal-600 text-white rounded-full flex items-center justify-center font-medium">
+                <div className="flex-shrink-0 w-12 h-12 bg-geyao-600 text-white rounded-full flex items-center justify-center font-medium">
                   {step.step}
                 </div>
                 <div>
-                  <h3 className="text-xl mb-2">{step.name}</h3>
-                  <p className="text-beige-700">{step.description}</p>
+                  <h3 className="text-xl mb-2 text-tianqing-800">{step.name}</h3>
+                  <p className="text-guanyao-700">{step.description}</p>
                 </div>
               </div>
             ))}

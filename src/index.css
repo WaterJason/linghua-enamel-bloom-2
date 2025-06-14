@@ -10,25 +10,25 @@
 
 @layer base {
   :root {
-    --background: 220 25% 97%;
-    --foreground: 220 15% 15%;
+    --background: 43 23% 97%;
+    --foreground: 43 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 15% 15%;
+    --card-foreground: 43 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 15% 15%;
+    --popover-foreground: 43 25% 15%;
 
-    --primary: 207 43% 51%;
+    --primary: 210 40% 55%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 45 32% 75%;
+    --secondary: 33 32% 75%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 20% 94%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 42 37% 71%;
+    --accent: 33 37% 71%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -36,7 +36,7 @@
 
     --border: 214.3 31.8% 85%;
     --input: 214.3 31.8% 85%;
-    --ring: 207 43% 51%;
+    --ring: 210 40% 55%;
 
     --radius: 0.5rem;
 
@@ -60,16 +60,16 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 207 43% 51%;
+    --primary: 210 40% 55%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 45 32% 30%;
+    --secondary: 33 32% 30%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 42 37% 30%;
+    --accent: 33 37% 30%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -89,10 +89,12 @@
 
   body {
     @apply bg-background text-foreground font-noto-sans-sc antialiased;
+    background: linear-gradient(135deg, #f9f8f6 0%, #f5f1e8 100%);
   }
   
   h1, h2, h3, h4, h5 {
     @apply font-noto-serif-sc font-medium tracking-wide;
+    color: #2d4f75;
   }
   
   h1 {
@@ -117,6 +119,7 @@
   
   p {
     @apply leading-relaxed md:leading-loose;
+    color: #6a6157;
   }
 }
 
@@ -126,12 +129,12 @@
   }
   
   .highlight-text {
-    @apply text-azure-700 inline-block relative;
+    @apply text-tianqing-700 inline-block relative;
   }
   
   .highlight-text::after {
     content: "";
-    @apply absolute bottom-0 left-0 w-full h-0.5 bg-seal-500 scale-x-0 transition-transform duration-300 origin-bottom-right;
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-geyao-500 scale-x-0 transition-transform duration-300 origin-bottom-right;
   }
   
   .highlight-text:hover::after {
@@ -139,15 +142,16 @@
   }
   
   .en-text {
-    @apply font-garamond italic text-beige-600 text-sm;
+    @apply font-garamond italic text-guanyao-600 text-sm;
   }
   
   .btn-primary {
-    @apply px-6 py-3 bg-azure-600 hover:bg-azure-700 text-white rounded transition-colors duration-300 inline-flex items-center justify-center;
+    @apply px-6 py-3 bg-tianqing-600 hover:bg-tianqing-700 text-white rounded transition-colors duration-300 inline-flex items-center justify-center;
+    box-shadow: 0 2px 8px rgba(66, 119, 170, 0.2);
   }
   
   .btn-secondary {
-    @apply px-6 py-3 border border-beige-400 hover:bg-beige-100 text-beige-900 rounded transition-colors duration-300 inline-flex items-center justify-center;
+    @apply px-6 py-3 border border-guanyao-400 hover:bg-guanyao-100 text-molin-900 rounded transition-colors duration-300 inline-flex items-center justify-center;
   }
   
   .vertical-text {
@@ -161,16 +165,17 @@
   
   .section-title::before {
     content: "";
-    @apply block w-6 h-0.5 bg-seal-500;
+    @apply block w-6 h-0.5 bg-geyao-500;
   }
   
   .section-divider {
-    @apply my-20 md:my-32 border-t border-beige-200;
+    @apply my-20 md:my-32 border-t border-guanyao-200;
   }
   
   .image-frame {
-    @apply relative border-beige-200 border p-1 bg-white;
+    @apply relative border-guanyao-200 border p-1 bg-white;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
   }
   
   .asymmetric-layout {

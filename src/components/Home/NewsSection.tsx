@@ -28,26 +28,26 @@ const NewsSection = () => {
     <section className="py-20 bg-white">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl mb-4">
+          <h2 className="text-3xl md:text-4xl mb-4 text-tianqing-800">
             品牌动态 · 传承创新
           </h2>
-          <p className="text-lg text-beige-700">
+          <p className="text-lg text-guanyao-700">
             关注聆花最新动态，见证非遗传承与创新之路
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {news.map((item, index) => (
-            <article key={index} className="bg-beige-50 p-6 rounded-lg hover:shadow-sm transition-shadow">
-              <div className="flex items-center gap-2 text-sm text-beige-600 mb-3">
+            <article key={index} className="bg-ruyao-50 p-6 rounded-lg hover:shadow-sm transition-shadow">
+              <div className="flex items-center gap-2 text-sm text-guanyao-600 mb-3">
                 <Calendar className="w-4 h-4" />
                 <time>{item.date}</time>
-                <span className="px-2 py-1 bg-azure-100 text-azure-700 rounded text-xs">
+                <span className="px-2 py-1 bg-tianqing-100 text-tianqing-700 rounded text-xs">
                   {item.category}
                 </span>
               </div>
-              <h3 className="text-lg mb-3 leading-tight">{item.title}</h3>
-              <p className="text-beige-700 text-sm leading-relaxed">{item.summary}</p>
+              <h3 className="text-lg mb-3 leading-tight text-tianqing-800">{item.title}</h3>
+              <p className="text-guanyao-700 text-sm leading-relaxed">{item.summary}</p>
             </article>
           ))}
         </div>

@@ -34,10 +34,10 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-transparent to-beige-50/50">
+    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-transparent to-ruyao-50/50">
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0 opacity-80">
-        <div className="absolute inset-0 bg-gradient-to-r from-beige-900/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-molin-900/20 to-transparent" />
         <img
           src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=3840&q=80"
           alt="背景"
@@ -64,7 +64,7 @@ const Hero = () => {
 
           {/* 创新工艺亮点 - 突出显示 */}
           <div 
-            className={`bg-white/20 backdrop-blur-sm px-5 py-4 rounded-md border-l-4 border-seal-500 mb-8 max-w-xl opacity-0 transform ${
+            className={`bg-white/20 backdrop-blur-sm px-5 py-4 rounded-md border-l-4 border-geyao-500 mb-8 max-w-xl opacity-0 transform ${
               showInnovation ? "opacity-100 translate-y-0" : "translate-y-8"
             } transition-all duration-1000 ease-out delay-200`}
           >
@@ -91,7 +91,7 @@ const Hero = () => {
             } transition-all duration-1000 ease-out`}
           >
             <Link to="/workshop">
-              <Button size="lg" variant="default" className="bg-seal-600 hover:bg-seal-700">
+              <Button size="lg" variant="default" className="bg-geyao-600 hover:bg-geyao-700">
                 立即预约体验
               </Button>
             </Link>

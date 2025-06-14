@@ -23,17 +23,17 @@ const WorkshopIntro = () => {
   ];
 
   return (
-    <section className="py-20 bg-beige-50">
+    <section className="py-20 bg-ruyao-50">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl mb-6">
+            <h2 className="text-3xl md:text-4xl mb-6 text-tianqing-800">
               亲手体验非遗之美
-              <span className="block text-lg font-garamond italic text-beige-600 mt-2">
+              <span className="block text-lg font-garamond italic text-guanyao-600 mt-2">
                 Hands-on Heritage Experience
               </span>
             </h2>
-            <p className="text-lg text-beige-800 mb-8">
+            <p className="text-lg text-molin-800 mb-8">
               在聆花手作体验馆，您可以亲身感受掐丝珐琅的独特魅力，
               在专业老师的指导下，创作属于自己的珐琅艺术品。
             </p>
@@ -41,12 +41,12 @@ const WorkshopIntro = () => {
             <div className="space-y-6 mb-8">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-azure-100 rounded-full flex items-center justify-center">
-                    <feature.icon className="w-6 h-6 text-azure-600" />
+                  <div className="flex-shrink-0 w-12 h-12 bg-tianqing-100 rounded-full flex items-center justify-center">
+                    <feature.icon className="w-6 h-6 text-tianqing-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg mb-1">{feature.title}</h3>
-                    <p className="text-beige-700">{feature.description}</p>
+                    <h3 className="text-lg mb-1 text-tianqing-800">{feature.title}</h3>
+                    <p className="text-guanyao-700">{feature.description}</p>
                   </div>
                 </div>
               ))}
